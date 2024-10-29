@@ -87,7 +87,7 @@ public class ServiceTaskImpl implements ServiceTask {
         MTask task = repo.findById(taskID).get();
         if (!user.tasks.contains(task)) throw new SecurityException("Ce n'est pas ta tâche !");
 
-            user.tasks.remove(task);
+        user.tasks.remove(task);
     }
 
     @Override
