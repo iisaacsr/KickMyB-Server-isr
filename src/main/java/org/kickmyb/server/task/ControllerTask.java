@@ -39,8 +39,11 @@ public class ControllerTask {
         return "";
     }
 
-    @DeleteMapping (value = "/api/delete/{taskID}", produces = "text/plain")
+    @DeleteMapping(value = "/api/delete/{taskID}", produces = "text/plain")
     public @ResponseBody String deleteTask(@PathVariable long taskID){
+        System.out.println("KICKB SERVER : Delete task : Id = " + taskID);
+        MUser user = currentUser();
+        serviceTask.delete(taskID, user);
         return "";
     }
 
