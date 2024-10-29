@@ -1,6 +1,7 @@
 package org.kickmyb.server.task;
 
 import org.joda.time.DateTime;
+import org.kickmyb.server.ConfigHTTP;
 import org.kickmyb.server.account.MUser;
 import org.kickmyb.server.account.MUserRepository;
 import org.kickmyb.transfer.*;
@@ -85,8 +86,7 @@ public class ServiceTaskImpl implements ServiceTask {
         if (user.username.equals("")) throw new SecurityException();
         MTask task = repo.findById(taskID).get();
 
-        repo.delete(task);
-        repo.save(task);
+        user.tasks.remove(task);
     }
 
     @Override
