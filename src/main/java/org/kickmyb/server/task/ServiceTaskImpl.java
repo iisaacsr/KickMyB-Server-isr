@@ -83,10 +83,11 @@ public class ServiceTaskImpl implements ServiceTask {
     @Override
     public void delete(long taskID, MUser user) throws Existing, SecurityException{
         if (taskID < 0) throw new Existing();
-        if (user.username.equals("")) throw new SecurityException();
+        if (user.username.equals("")) throw new SecurityException("T'es qui ?");
         MTask task = repo.findById(taskID).get();
+        if (!user.tasks.contains(task)) throw new SecurityException("Ce n'est pas ta tâche !");
 
-        user.tasks.remove(task);
+            user.tasks.remove(task);
     }
 
     @Override
