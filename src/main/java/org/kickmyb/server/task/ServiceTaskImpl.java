@@ -78,6 +78,11 @@ public class ServiceTaskImpl implements ServiceTask {
         repoUser.save(user);
     }
 
+    // TODO delete task
+    @Override
+    public void delete(long taskID, MUser user){
+    }
+
     @Override
     public void updateProgress(long taskID, int value) {
         MTask element = repo.findById(taskID).get();

@@ -27,7 +27,6 @@ public class ControllerTask {
     @PostMapping(value = "/api/add", produces = "text/plain")
     public @ResponseBody String addOne(@RequestBody AddTaskRequest request) throws ServiceTask.Empty, ServiceTask.TooShort, ServiceTask.Existing {
         System.out.println("KICKB SERVER : Add a task : " + request.name + " date " + request.deadline);
-        ConfigHTTP.attenteArticifielle();
         MUser user = currentUser();
         serviceTask.addOne(request, user);
         return "";
@@ -36,15 +35,18 @@ public class ControllerTask {
     @GetMapping(value = "/api/progress/{taskID}/{value}", produces = "text/plain")
     public @ResponseBody String updateProgress(@PathVariable long taskID, @PathVariable int value) {
         System.out.println("KICKB SERVER : Progress for task : " + taskID + " @" + value);
-        ConfigHTTP.attenteArticifielle();
         serviceTask.updateProgress(taskID, value);
+        return "";
+    }
+
+    @DeleteMapping (value = "/api/delete/{taskID}", produces = "text/plain")
+    public @ResponseBody String deleteTask(@PathVariable long taskID){
         return "";
     }
 
     @GetMapping("/api/home")
     public @ResponseBody List<HomeItemResponse> home() {
         System.out.println("KICKB SERVER : Task list  with cookie");
-        ConfigHTTP.attenteArticifielle();
         MUser user = currentUser();
         return serviceTask.home(user.id);
     }
@@ -52,7 +54,6 @@ public class ControllerTask {
     @GetMapping("/api/detail/{id}")
     public @ResponseBody TaskDetailResponse detail(@PathVariable long id) {
         System.out.println("KICKB SERVER : Detail  with cookie ");
-        ConfigHTTP.attenteArticifielle();
         MUser user = currentUser();
         return serviceTask.detail(id, user);
     }
